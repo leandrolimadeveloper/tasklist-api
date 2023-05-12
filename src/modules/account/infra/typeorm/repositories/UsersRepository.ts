@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { AppDataSource } from '../../../../../shared/infra/typeorm/data-source';
+import { AppDataSource } from '@shared/infra/typeorm/data-source';
 
 import { ICreateUserDTO } from '@modules/account/dtos/ICreateUserDTO';
 import { User } from '../entities/User';
@@ -21,6 +21,16 @@ class UsersRepository implements IUsersRepository {
         });
 
         await this.repository.save(user);
+    }
+
+    async findByEmail(email: string): Promise<User> {
+        const user = await this.repository.findOne({
+            where: {
+                email,
+            },
+        });
+
+        return user;
     }
 }
 

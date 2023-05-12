@@ -1,5 +1,6 @@
 import 'reflect-metadata';
-import express, { Request, Response } from 'express';
+import express from 'express';
+import 'express-async-errors';
 
 import createDatabaseConnection from '../typeorm';
 
@@ -16,5 +17,6 @@ const app = express();
 app.use(express.json());
 
 app.use(routes);
+app.use(errorHandlingMiddleware);
 
 export { app };
