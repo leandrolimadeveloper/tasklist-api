@@ -3,7 +3,7 @@ import { hash } from 'bcryptjs';
 
 import { ICreateUserDTO } from '@modules/account/dtos/ICreateUserDTO';
 import { IUsersRepository } from '@modules/account/repositories/IUsersRepository';
-import { AppError } from '@shared/infra/http/errors/AppError';
+import { AppError } from '../../../../shared/infra/http/errors/AppError';
 
 @injectable()
 class CreateUserUseCase {
