@@ -15,17 +15,11 @@ class UsersRepositoryInMemory implements IUsersRepository {
             password,
         });
 
-        // eslint-disable-next-line no-console
-        console.log('user', user);
-
         this.users.push(user);
     }
 
     async findByEmail(email: string): Promise<User> {
         const user = this.users.find((user) => user.email === email);
-
-        // eslint-disable-next-line no-console
-        console.log(user);
 
         return user;
     }
