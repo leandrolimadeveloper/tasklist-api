@@ -1,9 +1,10 @@
 import { inject, injectable } from 'tsyringe';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 import { IUsersRepository } from '@modules/account/repositories/IUsersRepository';
+
 import { AppError } from '@shared/infra/http/errors/AppError';
-import { sign } from 'jsonwebtoken';
 
 export interface IRequest {
     email: string;
