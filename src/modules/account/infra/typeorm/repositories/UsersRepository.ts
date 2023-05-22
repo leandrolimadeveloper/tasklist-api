@@ -1,4 +1,5 @@
 import { Repository } from 'typeorm';
+
 import { AppDataSource } from '@shared/infra/typeorm/data-source';
 
 import { ICreateUserDTO } from '@modules/account/dtos/ICreateUserDTO';

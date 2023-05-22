@@ -10,7 +10,7 @@ import createDatabaseConnection from '../typeorm';
 
 createDatabaseConnection();
 
-import '../../container';
+import '@shared/container';
 
 import { routes } from './routes';
 

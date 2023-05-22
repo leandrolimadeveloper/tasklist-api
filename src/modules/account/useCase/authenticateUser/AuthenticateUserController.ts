@@ -1,7 +1,7 @@
+import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 
 import { AuthenticateUserUseCase } from './AuthenticateUserUseCase';
-import { container } from 'tsyringe';
 
 import { IRequest } from './AuthenticateUserUseCase';
 
