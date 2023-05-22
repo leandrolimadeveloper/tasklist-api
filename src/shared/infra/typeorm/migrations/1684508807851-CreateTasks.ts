@@ -16,6 +16,11 @@ export class CreateTasks1684508807851 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
+                        name: 'description',
+                        type: 'varchar',
+                        isNullable: true,
+                    },
+                    {
                         name: 'done',
                         type: 'boolean',
                         default: false,

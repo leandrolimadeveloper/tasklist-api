@@ -1,4 +1,4 @@
-import { TasksRepositoryInMemory } from '@modules/task/repositories/in-memory/TasksRepositoryInMemory';
+import { TasksRepositoryInMemory } from '@modules/task/repositores/in-memory/TasksRepositoryInMemory';
 import { CreateTaskUseCase } from './CreateTaskUseCase';
 
 let tasksRepositoryInMemory: TasksRepositoryInMemory;
@@ -13,11 +13,13 @@ describe('Create a new task', () => {
     it('should be able to create a new task', async () => {
         const task = {
             name: 'Task name',
+            description: 'Task description',
             user_id: '123',
         };
 
         await createTaskUseCase.execute({
             name: task.name,
+            description: task.description,
             user_id: task.user_id,
         });
 

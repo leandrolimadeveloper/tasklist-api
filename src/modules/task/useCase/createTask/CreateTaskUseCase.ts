@@ -2,8 +2,9 @@ import { inject, injectable } from 'tsyringe';
 
 import { ITasksRepository } from '@modules/task/repositores/ITasksRepository';
 
-interface IRequest {
+export interface IRequest {
     name: string;
+    description: string;
     user_id: string;
 }
 
@@ -14,8 +15,8 @@ class CreateTaskUseCase {
         private tasksRepository: ITasksRepository
     ) {}
 
-    async execute({ name, user_id }: IRequest) {
-        await this.tasksRepository.create({ name, user_id });
+    async execute({ name, description, user_id }: IRequest) {
+        await this.tasksRepository.create({ name, description, user_id });
     }
 }
 

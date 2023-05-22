@@ -13,6 +13,9 @@ class Task {
     name: string;
 
     @Column()
+    description: string;
+
+    @Column()
     done: boolean;
 
     @Column()
