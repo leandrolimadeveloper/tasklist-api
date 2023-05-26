@@ -23,6 +23,7 @@ describe('Add task to My Day feature', () => {
             name: 'Task name',
             description: 'Task description',
             done: false,
+            my_day: false,
             user_id: '123abc',
         };
 

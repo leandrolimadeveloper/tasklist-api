@@ -12,7 +12,7 @@ const createTaskController = new CreateTaskController();
 const markTaskAsDoneController = new MarkTaskAsDoneController();
 const addTaskToMyDayController = new AddTaskToMyDayController();
 
-taskRoutes.post('/:id', authenticationMiddleware, createTaskController.handle);
+taskRoutes.post('/', authenticationMiddleware, createTaskController.handle);
 taskRoutes.put('/:id/done', authenticationMiddleware, markTaskAsDoneController.handle);
 taskRoutes.put('/:id/myday', authenticationMiddleware, addTaskToMyDayController.handle);
 
