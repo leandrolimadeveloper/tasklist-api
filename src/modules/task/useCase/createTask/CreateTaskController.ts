@@ -13,9 +13,9 @@ class CreateTaskController {
         createTaskUserCase.execute({ user_id: id, name, description });
 
         return response.status(201).json({
-            user_id: id,
             name,
             description,
+            user_id: id,
         });
     }
 }

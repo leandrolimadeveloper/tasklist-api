@@ -13,14 +13,25 @@ class TasksRepository implements ITasksRepository {
         this.repository = AppDataSource.getRepository(Task);
     }
 
-    async create({ name, description, user_id }: ICreateTaskDTO): Promise<void> {
+    async create({ name, description, user_id, done }: ICreateTaskDTO): Promise<void> {
         const task = this.repository.create({
             name,
             description,
+            done,
             user_id,
         });
 
         await this.repository.save(task);
+    }
+
+    async findById(id: string): Promise<Task | undefined> {
+        const task = await this.repository.findOne({
+            where: {
+                id,
+            },
+        });
+
+        return task;
     }
 
     async findByName(name: string): Promise<Task> {
@@ -31,6 +42,12 @@ class TasksRepository implements ITasksRepository {
         });
 
         return task;
+    }
+
+    async turnTaskDone(task: Task): Promise<Task | undefined> {
+        const taskToBeUpdated = await this.repository.save(task);
+
+        return taskToBeUpdated;
     }
 }
 
