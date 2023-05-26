@@ -5,7 +5,7 @@ import { ITasksRepository } from '@modules/task/repositores/ITasksRepository';
 class TasksRepositoryInMemory implements ITasksRepository {
     tasks: Task[] = [];
 
-    async create({ id, name, description, done, user_id }: ICreateTaskDTO): Promise<void> {
+    async create({ id, name, description, done, my_day, user_id }: ICreateTaskDTO): Promise<void> {
         const task = new Task();
 
         Object.assign(task, {
@@ -13,6 +13,7 @@ class TasksRepositoryInMemory implements ITasksRepository {
             name,
             description,
             done,
+            my_day,
             user_id,
         });
 
@@ -32,17 +33,11 @@ class TasksRepositoryInMemory implements ITasksRepository {
     }
 
     async turnTaskDone(task: Task): Promise<Task> {
-        return;
+        return task;
+    }
 
-        // const taskToBeUpdated = new Task();
-
-        // Object.assign(taskToBeUpdated, {
-        //     task,
-        // });
-
-        // this.tasks.push(taskToBeUpdated);
-
-        // return taskToBeUpdated;
+    async addTaskToMyDay(task: Task): Promise<Task> {
+        return task;
     }
 }
 

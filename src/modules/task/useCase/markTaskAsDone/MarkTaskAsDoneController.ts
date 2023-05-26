@@ -2,6 +2,7 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 
 import { MarkTaskAsDoneUseCase } from './MarkTaskAsDoneUseCase';
+
 import { AppError } from '@shared/infra/http/errors/AppError';
 
 class MarkTaskAsDoneController {

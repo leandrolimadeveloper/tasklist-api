@@ -13,11 +13,12 @@ class TasksRepository implements ITasksRepository {
         this.repository = AppDataSource.getRepository(Task);
     }
 
-    async create({ name, description, user_id, done }: ICreateTaskDTO): Promise<void> {
+    async create({ name, description, user_id, done, my_day }: ICreateTaskDTO): Promise<void> {
         const task = this.repository.create({
             name,
             description,
             done,
+            my_day,
             user_id,
         });
 
@@ -48,6 +49,12 @@ class TasksRepository implements ITasksRepository {
         const taskToBeUpdated = await this.repository.save(task);
 
         return taskToBeUpdated;
+    }
+
+    async addTaskToMyDay(task: Task): Promise<Task> {
+        const taskToBeAddedToMyDay = await this.repository.save(task);
+
+        return taskToBeAddedToMyDay;
     }
 }
 

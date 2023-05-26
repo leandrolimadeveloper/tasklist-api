@@ -9,7 +9,7 @@ interface IRequest {
 }
 
 @injectable()
-class MarkTaskAsDoneUseCase {
+class AddTaskToMyDayUseCase {
     constructor(
         @inject('TasksRepository')
         private tasksRepository: ITasksRepository
@@ -22,14 +22,14 @@ class MarkTaskAsDoneUseCase {
             throw new AppError('Task not found');
         }
 
-        if (task.done === true) {
-            throw new AppError('Property done is already true');
+        if (task.my_day === true) {
+            throw new AppError('Property my_day is already true');
         }
 
-        task.done = true;
+        task.my_day = true;
 
-        await this.tasksRepository.turnTaskDone(task);
+        await this.tasksRepository.addTaskToMyDay(task);
     }
 }
 
-export { MarkTaskAsDoneUseCase };
+export { AddTaskToMyDayUseCase };

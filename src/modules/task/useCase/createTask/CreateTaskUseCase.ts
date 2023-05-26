@@ -7,6 +7,7 @@ export interface IRequest {
     name: string;
     description: string;
     done?: boolean;
+    my_day?: boolean;
     user_id: string;
 }
 
@@ -17,8 +18,8 @@ class CreateTaskUseCase {
         private tasksRepository: ITasksRepository
     ) {}
 
-    async execute({ id, name, description, done, user_id }: IRequest) {
-        await this.tasksRepository.create({ id, name, description, done, user_id });
+    async execute({ id, name, description, done, my_day, user_id }: IRequest) {
+        await this.tasksRepository.create({ id, name, description, done, my_day, user_id });
     }
 }
 
