@@ -5,7 +5,6 @@ import { AppDataSource } from '@shared/infra/typeorm/data-source';
 import { ICreateUserDTO } from '@modules/account/dtos/ICreateUserDTO';
 import { User } from '../entities/User';
 import { IUsersRepository } from '@modules/account/repositories/IUsersRepository';
-import { JwtPayload } from 'jsonwebtoken';
 
 class UsersRepository implements IUsersRepository {
     private repository: Repository<User>;

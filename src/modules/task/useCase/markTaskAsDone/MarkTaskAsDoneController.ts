@@ -10,6 +10,7 @@ class MarkTaskAsDoneController {
         const { id } = request.params;
 
         const markTaskAsDoneUseCase = container.resolve(MarkTaskAsDoneUseCase);
+
         try {
             await markTaskAsDoneUseCase.execute({
                 taskId: id,

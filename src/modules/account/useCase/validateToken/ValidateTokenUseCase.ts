@@ -1,7 +1,9 @@
-import { JwtPayload, verify } from 'jsonwebtoken';
-import { IUsersRepository } from '@modules/account/repositories/IUsersRepository';
-import { AppError } from '@shared/infra/http/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import { verify } from 'jsonwebtoken';
+
+import { IUsersRepository } from '@modules/account/repositories/IUsersRepository';
+
+import { AppError } from '@shared/infra/http/errors/AppError';
 
 interface IPayload {
     sub: string;
@@ -30,16 +32,10 @@ class ValidateTokenUseCase {
             throw new AppError('Token not provided');
         }
 
-        console.log('isAToken', isAToken);
-
         try {
             const decoded = verify(token, process.env.JWT_SECRET) as IPayload;
 
-            console.log('decoded', decoded);
-
             const user = await this.usersRepository.findById(decoded.sub);
-
-            console.log('user', user);
 
             if (!user) {
                 // eslint-disable-next-line quotes
@@ -50,8 +46,6 @@ class ValidateTokenUseCase {
                 user,
                 token,
             };
-
-            console.log(userInfoResponse);
 
             return userInfoResponse;
         } catch (err) {

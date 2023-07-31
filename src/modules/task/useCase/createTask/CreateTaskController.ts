@@ -5,17 +5,18 @@ import { CreateTaskUseCase, IRequest } from './CreateTaskUseCase';
 
 class CreateTaskController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const { name, description, user_id }: IRequest = request.body;
+        try {
+            const { name, description }: IRequest = request.body;
+            const user_id = request.user.id;
 
-        const createTaskUserCase = container.resolve(CreateTaskUseCase);
+            const createTaskUserCase = container.resolve(CreateTaskUseCase);
 
-        createTaskUserCase.execute({ name, description, user_id });
+            const task = await createTaskUserCase.execute({ name, description, user_id });
 
-        return response.status(201).json({
-            name,
-            description,
-            user_id,
-        });
+            return response.status(201).json(task);
+        } catch (err) {
+            return response.status(500).json({ error: 'It was not possible to create a new task' + err.message });
+        }
     }
 }
 

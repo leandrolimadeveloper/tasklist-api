@@ -3,8 +3,8 @@ import { Repository } from 'typeorm';
 import { AppDataSource } from '@shared/infra/typeorm/data-source';
 
 import { ICreateTaskDTO } from '@modules/task/dtos/ICreateTaskDTO';
-import { Task } from '../entities/Task';
 import { ITasksRepository } from '@modules/task/repositores/ITasksRepository';
+import { Task } from '../entities/Task';
 
 class TasksRepository implements ITasksRepository {
     private repository: Repository<Task>;
@@ -13,8 +13,9 @@ class TasksRepository implements ITasksRepository {
         this.repository = AppDataSource.getRepository(Task);
     }
 
-    async create({ name, description, user_id, done, my_day }: ICreateTaskDTO): Promise<void> {
+    async create({ id, name, description, user_id, done, my_day }: ICreateTaskDTO): Promise<Task | undefined> {
         const task = this.repository.create({
+            id,
             name,
             description,
             done,
@@ -23,6 +24,8 @@ class TasksRepository implements ITasksRepository {
         });
 
         await this.repository.save(task);
+
+        return task;
     }
 
     async findById(id: string): Promise<Task | undefined> {

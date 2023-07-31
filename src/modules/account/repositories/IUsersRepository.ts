@@ -1,4 +1,3 @@
-import { JwtPayload } from 'jsonwebtoken';
 import { ICreateUserDTO } from '../dtos/ICreateUserDTO';
 import { User } from '../infra/typeorm/entities/User';
 

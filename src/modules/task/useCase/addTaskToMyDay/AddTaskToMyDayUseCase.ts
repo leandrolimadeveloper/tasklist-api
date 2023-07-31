@@ -22,11 +22,7 @@ class AddTaskToMyDayUseCase {
             throw new AppError('Task not found');
         }
 
-        if (task.my_day === true) {
-            throw new AppError('Property my_day is already true');
-        }
-
-        task.my_day = true;
+        task.my_day = !task.my_day;
 
         await this.tasksRepository.addTaskToMyDay(task);
     }

@@ -22,11 +22,9 @@ class MarkTaskAsDoneUseCase {
             throw new AppError('Task not found');
         }
 
-        if (task.done === true) {
-            throw new AppError('Property done is already true');
-        }
+        // throw new AppError('Property done is already true');
 
-        task.done = true;
+        task.done = !task.done;
 
         await this.tasksRepository.turnTaskDone(task);
     }

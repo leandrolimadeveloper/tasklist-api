@@ -12,12 +12,14 @@ describe('Create a new task', () => {
 
     it('should be able to create a new task', async () => {
         const task = {
+            id: 'abc123',
             name: 'Task name',
             description: 'Task description',
             user_id: '123',
         };
 
         await createTaskUseCase.execute({
+            id: task.id,
             name: task.name,
             description: task.description,
             user_id: task.user_id,
