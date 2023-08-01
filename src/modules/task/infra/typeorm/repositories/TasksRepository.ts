@@ -59,6 +59,10 @@ class TasksRepository implements ITasksRepository {
 
         return taskToBeAddedToMyDay;
     }
+
+    async delete(task: Task): Promise<void> {
+        await this.repository.delete(task);
+    }
 }
 
 export { TasksRepository };

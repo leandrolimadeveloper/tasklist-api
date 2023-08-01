@@ -16,7 +16,7 @@ class MarkTaskAsDoneController {
                 taskId: id,
             });
 
-            return response.status(200).send();
+            return response.status(200).end();
         } catch (error) {
             if (error instanceof AppError) {
                 return response.status(error.statusCode).json({ error: error.message });
