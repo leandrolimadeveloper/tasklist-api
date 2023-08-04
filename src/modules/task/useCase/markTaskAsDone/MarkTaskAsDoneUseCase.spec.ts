@@ -8,7 +8,7 @@ let tasksRepositoryInMemory: TasksRepositoryInMemory;
 let createTaskUseCase: CreateTaskUseCase;
 let markTaskAsDoneUseCase: MarkTaskAsDoneUseCase;
 
-describe('Mark a task as done', () => {
+describe('Mark a stask as done', () => {
     beforeEach(() => {
         tasksRepositoryInMemory = new TasksRepositoryInMemory();
         createTaskUseCase = new CreateTaskUseCase(tasksRepositoryInMemory);

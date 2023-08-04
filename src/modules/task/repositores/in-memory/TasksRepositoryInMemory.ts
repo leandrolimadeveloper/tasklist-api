@@ -34,12 +34,26 @@ class TasksRepositoryInMemory implements ITasksRepository {
         return task;
     }
 
+    async findByUserId(user_id: string): Promise<Task[]> {
+        const tasks = this.tasks.filter((task) => task.user_id === user_id);
+
+        return tasks;
+    }
+
     async turnTaskDone(task: Task): Promise<Task> {
-        return task;
+        const taskIndex = this.tasks.findIndex((t) => t.id === task.id);
+
+        this.tasks[taskIndex].done = true;
+
+        return this.tasks[taskIndex];
     }
 
     async addTaskToMyDay(task: Task): Promise<Task> {
-        return task;
+        const taskIndex = this.tasks.findIndex((t) => t.id === task.id);
+
+        this.tasks[taskIndex].my_day = true;
+
+        return this.tasks[taskIndex];
     }
 
     async delete(task: Task): Promise<void> {
