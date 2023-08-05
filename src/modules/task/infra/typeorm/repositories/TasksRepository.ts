@@ -59,6 +59,19 @@ class TasksRepository implements ITasksRepository {
         return task;
     }
 
+    async updateTask(id: string, name: string, description: string, user_id: string): Promise<Task> {
+        const task = {
+            id,
+            name,
+            description,
+            user_id,
+        };
+
+        const taskToBeUpdated = await this.repository.save(task);
+
+        return taskToBeUpdated;
+    }
+
     async turnTaskDone(task: Task): Promise<Task | undefined> {
         const taskToBeUpdated = await this.repository.save(task);
 

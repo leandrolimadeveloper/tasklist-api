@@ -1,6 +1,7 @@
 import { ICreateTaskDTO } from '@modules/task/dtos/ICreateTaskDTO';
 import { Task } from '@modules/task/infra/typeorm/entities/Task';
 import { ITasksRepository } from '@modules/task/repositores/ITasksRepository';
+import { AppError } from '@shared/infra/http/errors/AppError';
 
 class TasksRepositoryInMemory implements ITasksRepository {
     tasks: Task[] = [];
@@ -38,6 +39,21 @@ class TasksRepositoryInMemory implements ITasksRepository {
         const tasks = this.tasks.filter((task) => task.user_id === user_id);
 
         return tasks;
+    }
+
+    async updateTask(id: string, name: string, description: string, user_id: string): Promise<Task> {
+        const taskIndex = this.tasks.findIndex((task) => task.id === id);
+
+        const updatedTask: Task = {
+            ...this.tasks[taskIndex],
+            name,
+            description,
+            user_id,
+        };
+
+        this.tasks[taskIndex] = updatedTask;
+
+        return updatedTask;
     }
 
     async turnTaskDone(task: Task): Promise<Task> {

@@ -7,6 +7,7 @@ interface ITasksRepository {
     delete(task: Task): Promise<void>;
     findById(id: string): Promise<Task | undefined>;
     findByName(name: string): Promise<Task | undefined>;
+    updateTask(id: string, name: string, description: string, user_id: string): Promise<Task | undefined>;
     turnTaskDone(task: Task): Promise<Task | undefined>;
     addTaskToMyDay(task: Task): Promise<Task | undefined>;
 }

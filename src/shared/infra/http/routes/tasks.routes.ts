@@ -7,18 +7,21 @@ import { ListTasksByUserIdController } from '@modules/task/useCase/listTasksByUs
 import { MarkTaskAsDoneController } from '@modules/task/useCase/markTaskAsDone/MarkTaskAsDoneController';
 import { AddTaskToMyDayController } from '@modules/task/useCase/addTaskToMyDay/AddTaskToMyDayController';
 import { DeleteTaskController } from '@modules/task/useCase/deleteTask/DeleteTaskController';
+import { UpdateTaskController } from '@modules/task/useCase/updateTask/UpdateTaskController';
 
 const taskRoutes = Router();
 
 const createTaskController = new CreateTaskController();
 const listTasksByUserIdController = new ListTasksByUserIdController();
 const deleteTaskController = new DeleteTaskController();
+const updateTaskController = new UpdateTaskController();
 const markTaskAsDoneController = new MarkTaskAsDoneController();
 const addTaskToMyDayController = new AddTaskToMyDayController();
 
 taskRoutes.post('/', authenticationMiddleware, createTaskController.handle);
 taskRoutes.get('/', authenticationMiddleware, listTasksByUserIdController.handle);
 taskRoutes.delete('/:id', authenticationMiddleware, deleteTaskController.handle);
+taskRoutes.patch('/:id', authenticationMiddleware, updateTaskController.handle);
 taskRoutes.put('/:id/done', authenticationMiddleware, markTaskAsDoneController.handle);
 taskRoutes.put('/:id/myday', authenticationMiddleware, addTaskToMyDayController.handle);
 
