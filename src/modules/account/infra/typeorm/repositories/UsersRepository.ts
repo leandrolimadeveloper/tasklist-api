@@ -37,6 +37,10 @@ class UsersRepository implements IUsersRepository {
         return userUpdated;
     }
 
+    async delete(id: string): Promise<void> {
+        await this.repository.delete(id);
+    }
+
     async findById(id: string): Promise<User> {
         const user = await this.repository.findOne({
             where: {

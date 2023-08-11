@@ -5,7 +5,7 @@ import { IUsersRepository } from '../IUsersRepository';
 class UsersRepositoryInMemory implements IUsersRepository {
     users: User[] = [];
 
-    async create({ id, name, email, password }: ICreateUserDTO): Promise<void> {
+    async create({ id, name, email, password }: ICreateUserDTO): Promise<User> {
         const user = new User();
 
         Object.assign(user, {
@@ -16,6 +16,8 @@ class UsersRepositoryInMemory implements IUsersRepository {
         });
 
         this.users.push(user);
+
+        return user;
     }
 
     async update(id: string, name: string, email: string, password: string): Promise<User> {
@@ -35,6 +37,14 @@ class UsersRepositoryInMemory implements IUsersRepository {
         this.users[userIndex] = updateUser;
 
         return updateUser;
+    }
+
+    async delete(id: string): Promise<void> {
+        const userIndex = this.users.findIndex((user) => user.id === id);
+
+        if (userIndex !== -1) {
+            this.users.splice(userIndex, 1);
+        }
     }
 
     async findById(id: string): Promise<User> {
