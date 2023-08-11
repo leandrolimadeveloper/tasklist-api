@@ -18,6 +18,25 @@ class UsersRepositoryInMemory implements IUsersRepository {
         this.users.push(user);
     }
 
+    async update(id: string, name: string, email: string, password: string): Promise<User> {
+        const userIndex = this.users.findIndex((user) => user.id === id);
+
+        if (userIndex === -1) {
+            return undefined;
+        }
+
+        const updateUser: User = {
+            ...this.users[userIndex],
+            name,
+            email,
+            password,
+        };
+
+        this.users[userIndex] = updateUser;
+
+        return updateUser;
+    }
+
     async findById(id: string): Promise<User> {
         const user = this.users.find((user) => user.id === id);
 
@@ -28,6 +47,10 @@ class UsersRepositoryInMemory implements IUsersRepository {
         const user = this.users.find((user) => user.email === email);
 
         return user;
+    }
+
+    async validateToken(token: string): Promise<string> {
+        return token;
     }
 }
 

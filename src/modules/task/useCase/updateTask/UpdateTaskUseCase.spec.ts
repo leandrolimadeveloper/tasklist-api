@@ -1,6 +1,7 @@
 import { TasksRepositoryInMemory } from '@modules/task/repositores/in-memory/TasksRepositoryInMemory';
 import { CreateTaskUseCase } from '../createTask/CreateTaskUseCase';
 import { UpdateTaskUseCase } from './UpdateTaskUseCase';
+
 import { AppError } from '@shared/infra/http/errors/AppError';
 
 let tasksRepositoryInMemory: TasksRepositoryInMemory;
