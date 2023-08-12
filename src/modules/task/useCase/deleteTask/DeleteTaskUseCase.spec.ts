@@ -2,6 +2,8 @@ import { TasksRepositoryInMemory } from '@modules/task/repositores/in-memory/Tas
 import { CreateTaskUseCase } from '../createTask/CreateTaskUseCase';
 import { DeleteTaskUseCase } from './DeleteTaskUseCase';
 
+import { AppError } from '@shared/infra/http/errors/AppError';
+
 let tasksRepositoryInMemory: TasksRepositoryInMemory;
 let createTaskUseCase: CreateTaskUseCase;
 let deleteTaskUseCase: DeleteTaskUseCase;
@@ -28,5 +30,9 @@ describe('Delete a task', () => {
         const taskDeleted = await tasksRepositoryInMemory.findById(taskCreated.id);
 
         expect(taskDeleted).toBeUndefined();
+    });
+
+    it('should not be able to delete a task if it does not exist', async () => {
+        await expect(deleteTaskUseCase.execute('task-that-not-exists')).rejects.toBeInstanceOf(AppError);
     });
 });
