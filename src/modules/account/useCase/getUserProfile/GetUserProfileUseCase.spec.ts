@@ -24,13 +24,13 @@ describe('Get a user profile', () => {
 
         await createUserUseCase.execute(user);
 
-        const userCreated = await usersRepositoryInMemory.findByEmail(user.email);
+        const createdUser = await usersRepositoryInMemory.findByEmail(user.email);
 
-        const userObtained = await getUserProfileUseCase.execute(userCreated.id);
+        const obtainedUser = await getUserProfileUseCase.execute(createdUser.id);
 
-        expect(userObtained).toBeDefined();
-        expect(userCreated.id).toEqual(userObtained.id);
-        expect(userObtained).not.toHaveProperty('password');
+        expect(obtainedUser).toBeDefined();
+        expect(createdUser.id).toEqual(obtainedUser.id);
+        expect(obtainedUser).not.toHaveProperty('password');
     });
 
     it('should not be able to get a user profile if it does not exist', async () => {
