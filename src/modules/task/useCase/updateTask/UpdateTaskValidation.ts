@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-const CreateTaskSchema = z
+const UpdateTaskSchema = z
     .object({
         name: z.string(),
         description: z.string(),
     })
     .partial();
 
-type CreateTaskSchema = z.infer<typeof CreateTaskSchema>;
+type UpdateTaskSchema = z.infer<typeof UpdateTaskSchema>;
 
-export { CreateTaskSchema };
+export { UpdateTaskSchema };
