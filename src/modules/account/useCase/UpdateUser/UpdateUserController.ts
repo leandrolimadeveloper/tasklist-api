@@ -3,26 +3,34 @@ import { container } from 'tsyringe';
 
 import { UpdateUserUseCase } from './UpdateUserUseCase';
 
+import { UpdateUserSchema } from './UpdateUserValidation';
+
 class UpdateUserController {
     async handle(request: Request, response: Response): Promise<Response> {
-        const user_id = request.user.id;
-        const { name, email, password, newPassword } = request.body;
+        try {
+            const user_id = request.user.id;
+            const { name, email, password, newPassword } = request.body;
 
-        const updateUserUseCase = container.resolve(UpdateUserUseCase);
+            UpdateUserSchema.parse(request.body);
 
-        const user = await updateUserUseCase.execute({
-            id: user_id,
-            name,
-            email,
-            password,
-            newPassword,
-        });
+            const updateUserUseCase = container.resolve(UpdateUserUseCase);
 
-        return response.json({
-            user_id: user.id,
-            name: user.name,
-            email: user.email,
-        });
+            const user = await updateUserUseCase.execute({
+                id: user_id,
+                name,
+                email,
+                password,
+                newPassword,
+            });
+
+            return response.json({
+                user_id: user.id,
+                name: user.name,
+                email: user.email,
+            });
+        } catch (err) {
+            return response.status(400).json({ message: err });
+        }
     }
 }
 
