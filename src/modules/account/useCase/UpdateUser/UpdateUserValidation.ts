@@ -2,8 +2,23 @@ import { z } from 'zod';
 
 const UpdateUserSchema = z
     .object({
-        name: z.string().min(3, 'Name field needs to have at least 3 characterers'),
-        email: z.string().email('It is necessary inform a valid email'),
+        name: z
+            .string()
+            .min(3, 'Name field needs to have at least 3 characterers')
+            .transform((name) => {
+                return name
+                    .trim()
+                    .split(' ')
+                    .map((word) => {
+                        return word[0].toUpperCase().concat(word.substring(1).toLowerCase());
+                    })
+                    .join(' ');
+            }),
+        email: z
+            .string()
+            .toLowerCase()
+            .email('It is necessary inform a valid email')
+            .transform((value) => value.toLowerCase()),
         password: z
             .string()
             .min(6, 'Password must have at least 6 characterers')
