@@ -33,7 +33,6 @@ class TasksRepository implements ITasksRepository {
             where: {
                 user_id,
             },
-            relations: ['user'],
         });
 
         return tasks;

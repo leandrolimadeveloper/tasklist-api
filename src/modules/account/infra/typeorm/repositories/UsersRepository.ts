@@ -46,7 +46,6 @@ class UsersRepository implements IUsersRepository {
             where: {
                 id,
             },
-            // relations: ['task'],
         });
 
         return user;

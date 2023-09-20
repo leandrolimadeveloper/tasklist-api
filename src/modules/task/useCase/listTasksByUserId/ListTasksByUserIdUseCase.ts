@@ -4,6 +4,15 @@ import { ITasksRepository } from '@modules/task/repositores/ITasksRepository';
 import { Task } from '@modules/task/infra/typeorm/entities/Task';
 import { AppError } from '@shared/infra/http/errors/AppError';
 
+// interface ITask {
+//     id: string;
+//     name: string;
+//     description: string;
+//     done: boolean;
+//     my_day: boolean;
+//     user_id: string;
+// }
+
 @injectable()
 class ListTasksByUserIdUseCase {
     constructor(
