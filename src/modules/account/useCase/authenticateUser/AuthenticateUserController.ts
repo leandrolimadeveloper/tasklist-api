@@ -12,13 +12,13 @@ class AuthenticateUserController {
         try {
             const { email, password }: IRequest = request.body;
 
-            const transformedData = AuthenticateUserSchema.parse({ email });
+            const transformedData = AuthenticateUserSchema.parse({ email, password });
 
             const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase);
 
             const user = await authenticateUserUseCase.execute({
                 email: transformedData.email,
-                password,
+                password: transformedData.password,
             });
 
             return response.json({

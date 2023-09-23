@@ -6,6 +6,7 @@ const AuthenticateUserSchema = z.object({
         .toLowerCase()
         .email('It is necessary inform a valid email')
         .transform((value) => value.toLowerCase()),
+    password: z.string(),
 });
 
 type AuthenticateUserSchema = z.infer<typeof AuthenticateUserSchema>;
